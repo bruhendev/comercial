@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-                                 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-	version="2.0">
-	<persistence-unit name="sqlitePU">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+    <persistence-unit name="mariaDBPU">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<!-- JDBC properties -->
-		<properties>
-			<!-- JDBC URL para SQLite -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:sqlite:Pedido.db" />
+        <!-- JDBC properties -->
+        <properties>
+            <!-- JDBC URL para MariaDB -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/comercial" />
 
-			<!-- Driver JDBC para SQLite -->
-			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+            <!-- Driver JDBC para MariaDB -->
+            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
 
-			<!-- Dialeto do Hibernate para SQLite -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+            <!-- Dialeto do Hibernate para MariaDB -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect" />
 
-			<!-- Configuração do modo de criação do banco (pode ser 'update', 'create', 
-				'validate', etc.) -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+            <!-- Configuração do modo de criação do banco (pode ser 'update', 'create', 
+                'validate', etc.) -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
 
-			<!-- Ativar logs de SQL -->
-			<property name="hibernate.show_sql" value="true" />
+            <!-- Ativar logs de SQL -->
+            <property name="hibernate.show_sql" value="true" />
 
-			<!-- Não usar cache de segundo nível -->
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
+            <!-- Não usar cache de segundo nível -->
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 
-			<!-- Defina o gerenciamento do banco de dados -->
-			<property name="hibernate.c3p0.min_size" value="5" />
-			<property name="hibernate.c3p0.max_size" value="20" />
-			<property name="hibernate.c3p0.timeout" value="300" />
-			<property name="hibernate.c3p0.max_statements" value="50" />
-		</properties>
-	</persistence-unit>
+            <!-- Defina o gerenciamento do banco de dados -->
+            <property name="hibernate.c3p0.min_size" value="5" />
+            <property name="hibernate.c3p0.max_size" value="20" />
+            <property name="hibernate.c3p0.timeout" value="300" />
+            <property name="hibernate.c3p0.max_statements" value="50" />
+
+            <!-- Credenciais de acesso ao banco -->
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="123456" />
+        </properties>
+    </persistence-unit>
 </persistence>

@@ -10,7 +10,7 @@ public class Teste {
 
 	
 	public static void main (String[] args) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("sqlitePU");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("mariaDBPU");
 		EntityManager manager = factory.createEntityManager();
 		
 		EntityTransaction trx = manager.getTransaction();
