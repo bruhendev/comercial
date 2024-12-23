@@ -5,25 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "cliente")
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String nome;
-	private String email;
 	private String documentoReceitaFederal;
-	private TipoPessoa tipo;
-	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	private String email;
+	private TipoPessoa tipoPessoa;
+	private List<Endereco> enderecos = new ArrayList<>();
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -32,12 +39,22 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
+	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Column(name = "doc_receita_federal", nullable = false, length = 14)
+	public String getDocumentoReceitaFederal() {
+		return documentoReceitaFederal;
+	}
+
+	public void setDocumentoReceitaFederal(String documentoReceitaFederal) {
+		this.documentoReceitaFederal = documentoReceitaFederal;
 	}
 
 	public String getEmail() {
@@ -48,23 +65,17 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	public String getDocumentoReceitaFederal() {
-		return documentoReceitaFederal;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
 	}
 
-	public void setDocumentoReceitaFederal(String documentoReceitaFederal) {
-		this.documentoReceitaFederal = documentoReceitaFederal;
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
 	}
 
-	public TipoPessoa getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoPessoa tipo) {
-		this.tipo = tipo;
-	}
-
-	@Transient
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}

@@ -28,12 +28,6 @@
             <!-- Não usar cache de segundo nível -->
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 
-            <!-- Defina o gerenciamento do banco de dados -->
-            <property name="hibernate.c3p0.min_size" value="5" />
-            <property name="hibernate.c3p0.max_size" value="20" />
-            <property name="hibernate.c3p0.timeout" value="300" />
-            <property name="hibernate.c3p0.max_statements" value="50" />
-
             <!-- Credenciais de acesso ao banco -->
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="123456" />
